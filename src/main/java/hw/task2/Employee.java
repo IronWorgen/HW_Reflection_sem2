@@ -1,10 +1,10 @@
-package sem.task2;
+package hw.task2;
 
+import hw.task2.annotations.Column;
+import hw.task2.annotations.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sem.task2.annotations.Column;
-import sem.task2.annotations.Table;
 
 import java.util.UUID;
 @Data

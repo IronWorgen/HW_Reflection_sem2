@@ -1,12 +1,45 @@
-package sem.task2;
+package hw.task2;
 
-import sem.task2.annotations.Column;
-import sem.task2.annotations.Table;
+import hw.task2.annotations.Column;
+import hw.task2.annotations.Table;
 
 import java.lang.reflect.Field;
 import java.util.UUID;
 
 public class QueryBuilder {
+    /**
+     * создать запрос на удаление из БД по UUID
+     * @param clazz
+     * @param id
+     * @return
+     */
+    public String BuildDeleteQuery(Class<?> clazz, UUID id){
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+        if (clazz.isAnnotationPresent(Table.class)){
+            Table tableAnnotation =  clazz.getAnnotation(Table.class);
+            query
+                    .append(tableAnnotation.name())
+                    .append(" WHERE ");
+
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field field : fields) {
+                if(field.isAnnotationPresent(Column.class)){
+                    Column columnAnnotation = field.getAnnotation(Column.class);
+                    if (columnAnnotation.primaryKey()){
+                        query
+                                .append(columnAnnotation.name())
+                                .append(" = '")
+                                .append(id)
+                                .append("'");
+                    }
+                }
+            }
+        }else {
+            return "";
+        }
+        return query.toString();
+    }
+
     /**
      * создать запрос на добавление в БД
      * @param object

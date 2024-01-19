@@ -1,4 +1,4 @@
-package sem.task2;
+package hw.task2;
 
 import java.util.UUID;
 
@@ -32,6 +32,11 @@ public class Program {
         System.out.println("\nInsert query = " + queryBuilder.BuildInsertQuery(employee));
         System.out.println("\nSelect query = " + queryBuilder.buildSelectQuery(Employee.class, UUID.randomUUID()));
         System.out.println("\nUpdate query :\n" + queryBuilder.buildUpdateQuery(employee, UUID.randomUUID()));
+
+        //HomeWork
+        System.out.println("\n--------------------\nHomeWork");
+        System.out.println("Delete query = "+queryBuilder.BuildDeleteQuery(Employee.class, UUID.randomUUID()));
+
 
     }
 }
